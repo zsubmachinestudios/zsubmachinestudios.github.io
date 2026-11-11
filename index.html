@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ZSubMachine Studios — No Bloatware. </title>
+<title>ZSubMachine Studios — No Bloatware.</title>
 <meta name="description" content="zsubmachine studios builds ultra-lightweight softwares including games , apps which work out of box everywhere even in older hardwares">
 <link rel="icon" href="data:,">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -309,15 +309,84 @@
   @media (prefers-reduced-motion: reduce){
     *{animation:none !important; transition:none !important; scroll-behavior:auto !important;}
   }
+
+  /* ================= v2 REDESIGN LAYER ================= */
+  :root{--violet:#a78bfa;--mint:#5ef2c0;--grad:linear-gradient(120deg,#4fd8ff,#a78bfa 55%,#5ef2c0);}
+  body{background:radial-gradient(1200px 600px at 10% -10%,rgba(79,216,255,.10),transparent 60%),radial-gradient(900px 600px at 100% 10%,rgba(167,139,250,.10),transparent 60%),var(--void);}
+  .orb{position:fixed;z-index:-1;border-radius:50%;filter:blur(90px);opacity:.35;pointer-events:none;animation:float 14s ease-in-out infinite;}
+  .orb.a{width:380px;height:380px;background:#4fd8ff;top:8%;left:-120px;}
+  .orb.b{width:420px;height:420px;background:#a78bfa;top:40%;right:-160px;animation-delay:-5s;}
+  .orb.c{width:320px;height:320px;background:#5ef2c0;bottom:-80px;left:30%;opacity:.18;animation-delay:-9s;}
+  @keyframes float{0%,100%{transform:translateY(0) scale(1);}50%{transform:translateY(-40px) scale(1.08);}}
+
+  nav{margin:14px clamp(12px,3vw,40px) 0;border:1px solid rgba(255,255,255,.08);border-radius:16px;background:rgba(14,20,27,.65);backdrop-filter:blur(18px) saturate(140%);box-shadow:0 10px 40px rgba(0,0,0,.4);}
+  nav .links a{position:relative;padding:4px 0;}
+  nav .links a::after{content:"";position:absolute;left:0;bottom:-2px;height:2px;width:0;background:var(--grad);transition:width .25s;}
+  nav .links a:hover::after{width:100%;}
+
+  .hero{text-align:center;max-width:1000px;}
+  .eyebrow{border-radius:999px;background:rgba(79,216,255,.06);border-color:rgba(79,216,255,.35);}
+  h1{font-size:clamp(2.8rem,8vw,6rem);}
+  h1 span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;background-size:200% auto;animation:shine 6s linear infinite;}
+  @keyframes shine{to{background-position:200% center;}}
+  .hero p.lede{margin-left:auto;margin-right:auto;}
+  .hero .cta-row{justify-content:center;}
+  .btn{border-radius:12px;}
+  .btn.solid{background:var(--grad);border-color:transparent;box-shadow:0 8px 30px rgba(79,216,255,.25);}
+  .btn.solid:hover{background:var(--grad);transform:translateY(-2px);box-shadow:0 12px 40px rgba(167,139,250,.4);}
+  .stats{display:flex;justify-content:center;gap:clamp(18px,5vw,56px);flex-wrap:wrap;margin-top:56px;}
+  .stats div{text-align:center;}
+  .stats b{display:block;font-family:'Rajdhani',sans-serif;font-size:2rem;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .stats small{color:var(--steel);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;}
+
+  .section-head{border-bottom:none;position:relative;}
+  .section-head::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:1px;background:linear-gradient(90deg,var(--ice),var(--violet),transparent);}
+  .section-head h2{background:linear-gradient(90deg,#fff,#9fb4c4);-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .count{border:1px solid var(--line);border-radius:999px;padding:4px 14px;background:rgba(255,255,255,.03);}
+
+  .card{border-radius:18px;background:linear-gradient(160deg,rgba(22,31,41,.85),rgba(13,19,26,.85));border-color:rgba(255,255,255,.08);box-shadow:0 12px 40px rgba(0,0,0,.35);transform-style:preserve-3d;}
+  .card::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;border-radius:inherit;opacity:0;transition:opacity .3s;background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),rgba(79,216,255,.16),transparent 45%);}
+  .card:hover::before{opacity:1;}
+  .card:hover{border-color:rgba(79,216,255,.45);transform:translateY(-8px);box-shadow:0 24px 60px rgba(0,0,0,.5),0 0 40px rgba(79,216,255,.12);}
+  .card .cover::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(13,19,26,.9),transparent 55%);pointer-events:none;}
+  .card .status{z-index:2;border-radius:999px;backdrop-filter:blur(6px);}
+  .card .deploy{border-radius:10px;background:rgba(79,216,255,.06);}
+  .tag{border-radius:999px;}
+  .corner{display:none;}
+
+  .card.sw{border-color:rgba(167,139,250,.22);}
+  .card.sw:hover{border-color:rgba(167,139,250,.6);box-shadow:0 24px 60px rgba(0,0,0,.5),0 0 44px rgba(167,139,250,.18);}
+  .card.sw::before{background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),rgba(167,139,250,.2),transparent 45%);}
+  .card.sw .status{color:var(--violet);border-color:rgba(167,139,250,.5);}
+  .card.sw .tag{color:#b9a7f5;}
+  .card.sw .deploy{color:var(--violet);border-color:rgba(167,139,250,.5);background:rgba(167,139,250,.08);}
+  .card.sw .deploy:hover{background:rgba(167,139,250,.18);border-color:var(--violet);}
+  .card.sw .cover{background:linear-gradient(135deg,#1d1535,#0a0e12 70%);}
+  .sw-grid{grid-template-columns:repeat(auto-fit,minmax(320px,1fr));}
+  .card .readout{display:flex;align-items:center;gap:8px;}
+  .card.sw .readout::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 8px var(--mint);}
+
+  .file{border-radius:18px;background:rgba(17,24,32,.7);backdrop-filter:blur(10px);}
+  .principles{border-radius:18px;overflow:hidden;}
+  .principle{transition:background .25s;}
+  .principle:hover{background:var(--panel-hi);}
+  .principle .num{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:600;}
+  footer{background:rgba(10,14,18,.6);}
+
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
+  .reveal.in{opacity:1;transform:none;}
+  @media (prefers-reduced-motion: reduce){.reveal{opacity:1;transform:none;}}
 </style>
 </head>
 <body>
 <div class="grid-bg"></div>
+<div class="orb a"></div><div class="orb b"></div><div class="orb c"></div>
 
 <nav>
   <div class="brand"><span class="dot"></span>ZSUBMACHINE STUDIOS</div>
   <div class="links">
-    <a href="#softwares">Games</a>
+    <a href="#games">Games</a>
+    <a href="#softwares">Softwares</a>
     <a href="#studio">Studio</a>
     <a href="https://zsubmachine-studios.itch.io/" target="_blank" rel="noopener">itch.io</a>
     <a href="mailto:zsubmachinestudios@gmail.com">Contact</a>
@@ -332,6 +401,12 @@
     <a class="btn solid" href="#softwares">View SOFTWARES <span class="arrow">→</span></a>
     <a class="btn" href="https://zsubmachine-studios.itch.io/" target="_blank" rel="noopener">go to itch.io page</a>
   </div>
+  <div class="stats">
+    <div><b>06</b><small>Products</small></div>
+    <div><b>0 GPU</b><small>Required</small></div>
+    <div><b>100%</b><small>Offline-ready</small></div>
+    <div><b>&lt;3s</b><small>Load time</small></div>
+  </div>
 </header>
 
 <section id="games">
@@ -343,7 +418,7 @@
   <div class="games-grid">
 
     <!-- ICE (Infinite Cyber Elimination) -->
-    <article class="card">
+    <article class="card reveal">
       <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
       <div class="cover">
         <img src="https://img.itch.zone/aW1nLzI3NDc2NzY3LnBuZw==/original/8hfjDY.png" alt="ICE — Infinite Cyber Elimination cover art" loading="lazy">
@@ -364,7 +439,7 @@
     </article>
 
     <!-- ICE Forest -->
-    <article class="card">
+    <article class="card reveal">
       <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
       <div class="cover">
         <!-- TODO: replace placeholder-icon block below with <img src="YOUR-ICE-FOREST-COVER-URL" alt="ICE Forest cover art" loading="lazy"> once you grab the image URL — see chat for how -->
@@ -386,7 +461,7 @@
     </article>
 
     <!-- ICE Snow -->
-    <article class="card">
+    <article class="card reveal">
       <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
       <div class="cover">
         <img src="https://img.itch.zone/aW1nLzI3NjQ2NjQ0LnBuZw==/original/gqgNW8.png" alt="ICE Snow cover art" loading="lazy">
@@ -407,7 +482,7 @@
     </article>
 
     <!-- ICE City -->
-    <article class="card">
+    <article class="card reveal">
       <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
       <div class="cover">
         <img src="https://img.itch.zone/aW1nLzI3NjkyMTQyLnBuZw==/original/KRDeQ7.png" alt="ICE City cover art" loading="lazy">
@@ -430,10 +505,55 @@
   </div>
 </section>
 
-<section id="studio">
+<section id="softwares">
   <div class="section-head">
     <h2>SOFTWARES</h2>
-    <div class="count">AI & ML PRODUCTS</div>
+    <div class="count">02 SOFTWARES</div>
+  </div>
+  <div class="games-grid sw-grid">
+    <article class="card sw reveal">
+      <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+      <div class="cover">
+        <img src="https://raw.githubusercontent.com/zsubmachinestudios/zsubmachinestudios.github.io/main/AgentLITE.png" alt="Agent Lite cover" loading="lazy">
+        <div class="status">OFFLINE AI</div>
+      </div>
+      <div class="body">
+        <h3>Agent Lite</h3>
+        <p class="desc">A privacy-first, fully offline AI agent. Runs entirely on your machine — no cloud, no data leaks — and stays light enough for older hardware.</p>
+        <div class="tags"><span class="tag">AI Agent</span><span class="tag">Offline</span><span class="tag">Privacy-First</span><span class="tag">Lightweight</span></div>
+        <div class="foot">
+          <span class="readout">LOCAL · NO CLOUD</span>
+          <span class="deploy">LEARN MORE</span>
+        </div>
+      </div>
+      <a class="hit" href="https://lnkd.in/p/g3Y_xMty" target="_blank" rel="noopener" aria-label="Open Agent Lite"></a>
+    </article>
+
+    <article class="card sw reveal">
+      <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+      <div class="cover">
+        <img src="https://raw.githubusercontent.com/zsubmachinestudios/zsubmachinestudios.github.io/main/music.jpg" alt="Music Generator v1.5 cover" loading="lazy">
+        <div class="status">NEW</div>
+      </div>
+      <div class="body">
+        <h3>Music Generator v1.5</h3>
+        <p class="desc">Generates original relaxing music on demand. No GPU, no AI models — ultra-lightweight and built to run smoothly on older, low-powered CPUs.</p>
+        <div class="tags"><span class="tag">Music</span><span class="tag">No GPU</span><span class="tag">Original</span><span class="tag">CPU-Only</span></div>
+        <div class="foot">
+          <span class="readout">v1.5 · ULTRA-LIGHT</span>
+          <span class="deploy">LEARN MORE</span>
+        </div>
+      </div>
+      <a class="hit" href="https://lnkd.in/p/ghuKkRpN" target="_blank" rel="noopener" aria-label="Open Music Generator v1.5"></a>
+    </article>
+
+  </div>
+</section>
+
+<section id="studio">
+  <div class="section-head">
+    <h2>THE STUDIO</h2>
+    <div class="count">SOLO · INDEPENDENT</div>
   </div>
 
   <div class="about">
@@ -479,12 +599,16 @@
   <div class="links">
     <a href="https://zsubmachine-studios.itch.io/" target="_blank" rel="noopener">itch.io</a>
     <a href="mailto:zsubmachinestudios@gmail.com">Email</a>
-    <a href="#softwares">Games</a>
+    <a href="#games">Games</a>
+    <a href="#softwares">Softwares</a>
   </div>
 </footer>
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});
+  document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%4)*70+'ms';io.observe(el);});
+  document.querySelectorAll('.card').forEach(c=>c.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect();c.style.setProperty('--mx',(e.clientX-r.left)+'px');c.style.setProperty('--my',(e.clientY-r.top)+'px');}));
 </script>
 </body>
 </html>

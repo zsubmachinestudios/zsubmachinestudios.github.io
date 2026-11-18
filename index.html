@@ -376,14 +376,120 @@
   .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;}
   .reveal.in{opacity:1;transform:none;}
   @media (prefers-reduced-motion: reduce){.reveal{opacity:1;transform:none;}}
+
+  /* ================= v3 MODERN LAYER (added on top, nothing above removed) ================= */
+  @property --ang{syntax:'<angle>';initial-value:0deg;inherits:false;}
+  ::selection{background:rgba(167,139,250,.35);color:#fff;}
+  html{scrollbar-color:#2a3a4c var(--void);}
+  ::-webkit-scrollbar{width:10px;}::-webkit-scrollbar-track{background:var(--void);}
+  ::-webkit-scrollbar-thumb{background:linear-gradient(var(--ice-dim),#5b4a99);border-radius:10px;}
+  :focus-visible{outline:2px solid var(--ice);outline-offset:3px;border-radius:8px;}
+
+  /* scroll progress + cursor spotlight */
+  .progress{position:fixed;top:0;left:0;height:3px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:var(--grad);z-index:200;box-shadow:0 0 12px rgba(79,216,255,.6);}
+  .spot{position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(600px circle at var(--sx,50%) var(--sy,30%),rgba(79,216,255,.07),transparent 40%);}
+
+  /* nav: active link + mobile menu */
+  nav .links a.active{color:var(--white);}
+  nav .links a.active::after{width:100%;}
+  .menu-btn{display:none;width:42px;height:42px;border-radius:12px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);color:var(--white);cursor:pointer;align-items:center;justify-content:center;flex-direction:column;gap:5px;}
+  .menu-btn span{width:18px;height:2px;background:currentColor;border-radius:2px;transition:transform .25s,opacity .25s;}
+  nav.open .menu-btn span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  nav.open .menu-btn span:nth-child(2){opacity:0;}
+  nav.open .menu-btn span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+  @media (max-width:760px){
+    .menu-btn{display:flex;}
+    nav .links{position:absolute;top:calc(100% + 10px);left:0;right:0;flex-direction:column;align-items:flex-start;gap:16px;padding:20px 22px;background:rgba(14,20,27,.96);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.08);border-radius:16px;opacity:0;pointer-events:none;transform:translateY(-8px);transition:opacity .25s,transform .25s;}
+    nav.open .links{opacity:1;pointer-events:auto;transform:none;}
+  }
+
+  /* hero extras */
+  .eyebrow .live{width:7px;height:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 10px var(--mint);animation:pulse 1.6s infinite;}
+  .typer{margin-top:22px;font-family:'JetBrains Mono',monospace;color:var(--steel);font-size:.95rem;letter-spacing:.02em;}
+  .typer b{color:var(--white);font-weight:500;}
+  .typer .caret{display:inline-block;width:9px;height:1.1em;vertical-align:-3px;margin-left:2px;background:var(--ice);animation:blink 1s steps(1) infinite;}
+  @keyframes blink{50%{opacity:0;}}
+  .stats > div{padding:14px 22px;border:1px solid rgba(255,255,255,.06);border-radius:16px;background:rgba(255,255,255,.02);backdrop-filter:blur(6px);min-width:120px;transition:border-color .25s,transform .25s;}
+  .stats > div:hover{border-color:rgba(79,216,255,.35);transform:translateY(-3px);}
+  .scroll-hint{display:block;margin:46px auto 0;width:24px;height:38px;border:2px solid rgba(255,255,255,.18);border-radius:14px;position:relative;}
+  .scroll-hint::after{content:"";position:absolute;left:50%;top:7px;width:4px;height:8px;margin-left:-2px;border-radius:2px;background:var(--ice);animation:wheel 1.8s infinite;}
+  @keyframes wheel{0%{opacity:1;transform:translateY(0);}100%{opacity:0;transform:translateY(12px);}}
+
+  /* marquee strip */
+  .marquee{overflow:hidden;border-block:1px solid rgba(255,255,255,.06);background:rgba(255,255,255,.015);padding:16px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);}
+  .marquee .track{display:flex;gap:48px;width:max-content;animation:marq 32s linear infinite;}
+  .marquee:hover .track{animation-play-state:paused;}
+  .marquee span{font-family:'Rajdhani',sans-serif;font-weight:600;font-size:1.05rem;letter-spacing:.14em;text-transform:uppercase;color:var(--steel);white-space:nowrap;display:flex;align-items:center;gap:48px;}
+  .marquee span::after{content:"✦";color:var(--violet);font-size:.8rem;}
+  @keyframes marq{to{transform:translateX(-50%);}}
+
+  /* toolbar: filter chips + search */
+  .toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;max-width:1200px;margin:46px auto 0;padding:0 clamp(20px,5vw,64px);}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;}
+  .chip{font-family:'JetBrains Mono',monospace;font-size:.76rem;letter-spacing:.06em;text-transform:uppercase;padding:9px 16px;border-radius:999px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.03);color:var(--steel);cursor:pointer;transition:all .2s;}
+  .chip:hover{color:var(--white);border-color:rgba(79,216,255,.4);}
+  .chip.on{color:var(--void);background:var(--grad);border-color:transparent;font-weight:600;}
+  .search{position:relative;flex:1;max-width:340px;min-width:200px;}
+  .search input{width:100%;padding:11px 44px 11px 40px;border-radius:12px;border:1px solid rgba(255,255,255,.1);background:rgba(17,24,32,.7);color:var(--white);font:inherit;font-size:.9rem;outline:none;transition:border-color .2s,box-shadow .2s;}
+  .search input:focus{border-color:rgba(79,216,255,.5);box-shadow:0 0 0 4px rgba(79,216,255,.1);}
+  .search svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--steel);}
+  .search kbd{position:absolute;right:10px;top:50%;transform:translateY(-50%);font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--steel);border:1px solid var(--line);border-radius:6px;padding:1px 7px;}
+  .empty{grid-column:1/-1;text-align:center;padding:40px;color:var(--steel);border:1px dashed var(--line);border-radius:18px;font-family:'JetBrains Mono',monospace;font-size:.85rem;}
+  section.hidden{display:none;}
+  .section-head h2 .idx{font-family:'JetBrains Mono',monospace;font-size:.9rem;-webkit-text-fill-color:var(--ice-dim);margin-right:12px;vertical-align:middle;}
+
+  /* cards v3: tilt + animated gradient border + multi-buttons */
+  .card{--rx:0deg;--ry:0deg;}
+  .card:hover{transform:perspective(900px) rotateX(var(--rx)) rotateY(var(--ry)) translateY(-8px);}
+  .card::after{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.5px;z-index:4;pointer-events:none;opacity:0;transition:opacity .3s;
+    background:conic-gradient(from var(--ang),transparent 0 62%,var(--ice) 75%,var(--violet) 88%,transparent);
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:spin 3.5s linear infinite;}
+  .card:hover::after{opacity:1;}
+  @keyframes spin{to{--ang:360deg;}}
+  .card .cover{background:linear-gradient(110deg,#111a23 30%,#1b2836 50%,#111a23 70%);background-size:200% 100%;animation:shimmer 1.4s linear infinite;}
+  .card .cover.loaded{animation:none;}
+  @keyframes shimmer{to{background-position:-200% 0;}}
+  .card .cover img{opacity:0;transition:opacity .5s,transform .5s ease;}
+  .card .cover.loaded img{opacity:1;}
+  .card .cover .fallback{position:absolute;inset:0;display:none;align-items:center;justify-content:center;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:3rem;letter-spacing:.08em;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .card .cover.failed .fallback{display:flex;}
+  .card .badge{position:absolute;top:10px;left:10px;z-index:2;font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:600;letter-spacing:.14em;padding:4px 10px;border-radius:999px;color:var(--void);background:linear-gradient(120deg,var(--mint),var(--ice));box-shadow:0 0 18px rgba(94,242,192,.45);animation:pulse 2.4s ease-in-out infinite;}
+  .card .platform{position:absolute;left:12px;bottom:10px;z-index:2;font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.1em;color:var(--white);display:flex;gap:6px;align-items:center;text-transform:uppercase;opacity:.85;}
+  .card{display:flex;flex-direction:column;}
+  .card[hidden]{display:none;}
+  .card .body{flex:1;display:flex;flex-direction:column;}
+  .card .foot{flex-wrap:wrap;gap:10px;margin-top:auto;}
+  .card .actions{display:flex;gap:8px;flex-wrap:wrap;}
+  .card a.deploy{position:relative;z-index:3;}
+  .card .deploy svg{width:14px;height:14px;}
+  .card .deploy.primary{color:var(--void);background:var(--grad);border-color:transparent;}
+  .card .deploy.primary:hover{background:var(--grad);filter:brightness(1.12);box-shadow:0 6px 22px rgba(79,216,255,.35);}
+  .card.sw .deploy.primary{color:var(--void);background:linear-gradient(120deg,var(--violet),var(--ice));border-color:transparent;}
+
+  /* about extras */
+  .copy{margin-left:8px;font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:.08em;padding:2px 8px;border-radius:6px;border:1px solid var(--line);background:transparent;color:var(--steel);cursor:pointer;vertical-align:middle;}
+  .copy:hover{color:var(--ice);border-color:var(--ice-dim);}
+
+  /* back-to-top + toast */
+  .totop{position:fixed;right:22px;bottom:22px;z-index:150;width:46px;height:46px;border-radius:14px;border:1px solid rgba(255,255,255,.1);background:rgba(14,20,27,.8);backdrop-filter:blur(12px);color:var(--ice);font-size:1.1rem;cursor:pointer;opacity:0;transform:translateY(16px);pointer-events:none;transition:all .3s;}
+  .totop.show{opacity:1;transform:none;pointer-events:auto;}
+  .totop:hover{border-color:var(--ice);box-shadow:0 0 22px rgba(79,216,255,.3);}
+  .toast{position:fixed;left:50%;bottom:28px;z-index:300;transform:translate(-50%,20px);opacity:0;pointer-events:none;padding:11px 20px;border-radius:12px;background:rgba(14,20,27,.95);border:1px solid rgba(94,242,192,.4);color:var(--mint);font-family:'JetBrains Mono',monospace;font-size:.8rem;transition:all .3s;}
+  .toast.show{opacity:1;transform:translate(-50%,0);}
+  footer{position:relative;}
+  footer::before{content:"";position:absolute;top:-1px;left:0;right:0;height:1px;background:var(--grad);opacity:.6;}
+  @media (prefers-reduced-motion: reduce){.marquee .track,.card::after,.card .cover{animation:none !important;}}
 </style>
 </head>
 <body>
 <div class="grid-bg"></div>
 <div class="orb a"></div><div class="orb b"></div><div class="orb c"></div>
+<div class="spot"></div>
+<div class="progress" aria-hidden="true"></div>
 
 <nav>
-  <div class="brand"><span class="dot"></span>ZSUBMACHINE STUDIOS</div>
+  <a class="brand" href="#top"><span class="dot"></span>ZSUBMACHINE STUDIOS</a>
+  <button class="menu-btn" type="button" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
   <div class="links">
     <a href="#games">Games</a>
     <a href="#softwares">Softwares</a>
@@ -393,166 +499,64 @@
   </div>
 </nav>
 
-<header class="hero">
-  <div class="eyebrow">Optimising World !</div>
+<header class="hero" id="top">
+  <div class="eyebrow"><span class="live"></span>Optimising World !</div>
   <h1>NO BLOAT.<br>PURE <span>EFFICIENCY</span></h1>
+  <p class="typer">&gt; built for <b id="typed"></b><i class="caret"></i></p>
   <p class="lede">zsubmachine studios is an independent app , game development studio dedicated to delivering high-quality, no bloat development for quality user experiences. We engineer ultra-optimized, lightweight softwares maximum performance and instant action in the smallest download size possible.</p>
   <div class="cta-row">
     <a class="btn solid" href="#softwares">View SOFTWARES <span class="arrow">→</span></a>
-    <a class="btn" href="https://zsubmachine-studios.itch.io/" target="_blank" rel="noopener">go to itch.io page</a>
+    <a class="btn" href="#games">View GAMES</a>
+    <a class="btn" href="https://zsubmachine-studios.itch.io/" target="_blank" rel="noopener">go to itch.io page <span class="arrow">↗</span></a>
   </div>
   <div class="stats">
-    <div><b>06</b><small>Products</small></div>
+    <div><b id="stat-products" data-to="0">00</b><small>Products</small></div>
     <div><b>0 GPU</b><small>Required</small></div>
     <div><b>100%</b><small>Offline-ready</small></div>
     <div><b>&lt;3s</b><small>Load time</small></div>
   </div>
+  <a class="scroll-hint" href="#games" aria-label="Scroll to games"></a>
 </header>
+
+<div class="marquee" aria-hidden="true"><div class="track">
+  <span>No Bloat</span><span>Offline-First</span><span>CPU-Only</span><span>Runs on Old Hardware</span><span>Instant Load</span><span>Privacy-First</span><span>Tiny Downloads</span><span>Open Source</span>
+  <span>No Bloat</span><span>Offline-First</span><span>CPU-Only</span><span>Runs on Old Hardware</span><span>Instant Load</span><span>Privacy-First</span><span>Tiny Downloads</span><span>Open Source</span>
+</div></div>
+
+<div class="toolbar">
+  <div class="chips" role="group" aria-label="Filter products">
+    <button class="chip on" type="button" data-f="all" aria-pressed="true">All</button>
+    <button class="chip" type="button" data-f="game" aria-pressed="false">Games</button>
+    <button class="chip" type="button" data-f="software" aria-pressed="false">Softwares</button>
+  </div>
+  <label class="search">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+    <input id="q" type="search" placeholder="Search products, tags…" aria-label="Search products">
+    <kbd>/</kbd>
+  </label>
+</div>
 
 <section id="games">
   <div class="section-head">
-    <h2>GAMES</h2>
-    <div class="count">04 GAMES</div>
+    <h2><span class="idx">01 /</span>GAMES</h2>
+    <div class="count" id="games-count"></div>
   </div>
-
-  <div class="games-grid">
-
-    <!-- ICE (Infinite Cyber Elimination) -->
-    <article class="card reveal">
-      <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-      <div class="cover">
-        <img src="https://img.itch.zone/aW1nLzI3NDc2NzY3LnBuZw==/original/8hfjDY.png" alt="ICE — Infinite Cyber Elimination cover art" loading="lazy">
-        <div class="status">FREE</div>
-      </div>
-      <div class="body">
-        <h3>ICE: Infinite Cyber Elimination</h3>
-        <p class="desc">TPS/FPS shooter in a cyber-themed arena — unlimited players, instant action, no bloat.</p>
-        <div class="tags">
-          <span class="tag">FPS/TPS</span><span class="tag">Multiplayer</span><span class="tag">Sci-Fi</span><span class="tag">Open World</span>
-        </div>
-        <div class="foot">
-          <span class="readout">APK · 100MB</span>
-          <span class="deploy">TRY NOW !</span>
-        </div>
-      </div>
-      <a class="hit" href="https://zsubmachine-studios.itch.io/ice-infinite-cyber-elimination" target="_blank" rel="noopener" aria-label="Open ICE: Infinite Cyber Elimination on itch.io"></a>
-    </article>
-
-    <!-- ICE Forest -->
-    <article class="card reveal">
-      <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-      <div class="cover">
-        <!-- TODO: replace placeholder-icon block below with <img src="YOUR-ICE-FOREST-COVER-URL" alt="ICE Forest cover art" loading="lazy"> once you grab the image URL — see chat for how -->
-        <img src="https://img.itch.zone/aW1nLzI3NTkxMjQ5LnBuZw==/315x250%23c/EZOklM.png" alt="ICE Forest cover art" loading="lazy">
-        <div class="status">FREE</div>
-      </div>
-      <div class="body">
-        <h3>ICE Forest</h3>
-        <p class="desc">FPS/TPS combat through dense forest terrain — unlimited players, zero waiting.</p>
-        <div class="tags">
-          <span class="tag">FPS/TPS</span><span class="tag">Forest</span><span class="tag">Multiplayer</span>
-        </div>
-        <div class="foot">
-          <span class="readout">APK · 103MB</span>
-          <span class="deploy">TRY NOW !</span>
-        </div>
-      </div>
-      <a class="hit" href="https://zsubmachine-studios.itch.io/ice-forest" target="_blank" rel="noopener" aria-label="Open ICE Forest on itch.io"></a>
-    </article>
-
-    <!-- ICE Snow -->
-    <article class="card reveal">
-      <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-      <div class="cover">
-        <img src="https://img.itch.zone/aW1nLzI3NjQ2NjQ0LnBuZw==/original/gqgNW8.png" alt="ICE Snow cover art" loading="lazy">
-        <div class="status">FREE</div>
-      </div>
-      <div class="body">
-        <h3>ICE Snow</h3>
-        <p class="desc">The ICE skin reimagined in a frozen environment — same instant, deathmatch-ready action.</p>
-        <div class="tags">
-          <span class="tag">Deathmatch</span><span class="tag">PvP</span><span class="tag">Casual</span>
-        </div>
-        <div class="foot">
-          <span class="readout">APK · 108MB</span>
-          <span class="deploy">TRY NOW !</span>
-        </div>
-      </div>
-      <a class="hit" href="https://zsubmachine-studios.itch.io/ice-snow" target="_blank" rel="noopener" aria-label="Open ICE Snow on itch.io"></a>
-    </article>
-
-    <!-- ICE City -->
-    <article class="card reveal">
-      <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-      <div class="cover">
-        <img src="https://img.itch.zone/aW1nLzI3NjkyMTQyLnBuZw==/original/KRDeQ7.png" alt="ICE City cover art" loading="lazy">
-        <div class="status">FREE</div>
-      </div>
-      <div class="body">
-        <h3>ICE City</h3>
-        <p class="desc">Tactical FPS/TPS deathmatch across a dense urban battleground.</p>
-        <div class="tags">
-          <span class="tag">Tactical</span><span class="tag">FPS/TPS</span><span class="tag">PvP</span>
-        </div>
-        <div class="foot">
-          <span class="readout">APK · 106MB</span>
-          <span class="deploy">TRY NOW !</span>
-        </div>
-      </div>
-      <a class="hit" href="https://zsubmachine-studios.itch.io/ice-city" target="_blank" rel="noopener" aria-label="Open ICE City on itch.io"></a>
-    </article>
-
-  </div>
+  <!-- cards are generated from the GAMES list in the script at the bottom -->
+  <div class="games-grid" id="games-grid"></div>
 </section>
 
 <section id="softwares">
   <div class="section-head">
-    <h2>SOFTWARES</h2>
-    <div class="count">02 SOFTWARES</div>
+    <h2><span class="idx">02 /</span>SOFTWARES</h2>
+    <div class="count" id="sw-count"></div>
   </div>
-  <div class="games-grid sw-grid">
-    <article class="card sw reveal">
-      <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-      <div class="cover">
-        <img src="https://raw.githubusercontent.com/zsubmachinestudios/zsubmachinestudios.github.io/main/AgentLITE.png" alt="Agent Lite cover" loading="lazy">
-        <div class="status">OFFLINE AI</div>
-      </div>
-      <div class="body">
-        <h3>Agent Lite</h3>
-        <p class="desc">A privacy-first, fully offline AI agent. Runs entirely on your machine — no cloud, no data leaks — and stays light enough for older hardware.</p>
-        <div class="tags"><span class="tag">AI Agent</span><span class="tag">Offline</span><span class="tag">Privacy-First</span><span class="tag">Lightweight</span></div>
-        <div class="foot">
-          <span class="readout">LOCAL · NO CLOUD</span>
-          <span class="deploy">LEARN MORE</span>
-        </div>
-      </div>
-      <a class="hit" href="https://lnkd.in/p/g3Y_xMty" target="_blank" rel="noopener" aria-label="Open Agent Lite"></a>
-    </article>
-
-    <article class="card sw reveal">
-      <div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
-      <div class="cover">
-        <img src="https://raw.githubusercontent.com/zsubmachinestudios/zsubmachinestudios.github.io/main/music.jpg" alt="Music Generator v1.5 cover" loading="lazy">
-        <div class="status">NEW</div>
-      </div>
-      <div class="body">
-        <h3>Music Generator v1.5</h3>
-        <p class="desc">Generates original relaxing music on demand. No GPU, no AI models — ultra-lightweight and built to run smoothly on older, low-powered CPUs.</p>
-        <div class="tags"><span class="tag">Music</span><span class="tag">No GPU</span><span class="tag">Original</span><span class="tag">CPU-Only</span></div>
-        <div class="foot">
-          <span class="readout">v1.5 · ULTRA-LIGHT</span>
-          <span class="deploy">LEARN MORE</span>
-        </div>
-      </div>
-      <a class="hit" href="https://lnkd.in/p/g2wufQ79" target="_blank" rel="noopener" aria-label="Open Music Generator v1.5"></a>
-    </article>
-
-  </div>
+  <!-- cards are generated from the SOFTWARES list in the script at the bottom -->
+  <div class="games-grid sw-grid" id="sw-grid"></div>
 </section>
 
 <section id="studio">
   <div class="section-head">
-    <h2>THE STUDIO</h2>
+    <h2><span class="idx">03 /</span>THE STUDIO</h2>
     <div class="count">SOLO · INDEPENDENT</div>
   </div>
 
@@ -569,7 +573,7 @@
         <dt>Founder</dt><dd>Divyansh Loshali</dd>
         <dt>Company</dt><dd>ZSUBMACHINE STUDIOS</dd>
         <dt>D&amp;B D-U-N-S</dt><dd>581742808</dd>
-        <dt>Email</dt><dd><a href="mailto:zsubmachinestudios@gmail.com">zsubmachinestudios@gmail.com</a></dd>
+        <dt>Email</dt><dd><a href="mailto:zsubmachinestudios@gmail.com">zsubmachinestudios@gmail.com</a><button class="copy" type="button" data-copy="zsubmachinestudios@gmail.com">COPY</button></dd>
         <dt>Linkedin</dt><dd><a href="https://www.linkedin.com/in/divyansh-loshali-b1853a26b" target="_blank" rel="noopener">https://www.linkedin.com/in/divyansh-loshali-b1853a26b</a></dd>
         <dt>Instagram</dt><dd><a href="https://www.instagram.com/zsubmachinestudios/" target="_blank" rel="noopener">https://www.instagram.com/zsubmachinestudios/</a></dd>
         <dt>Games</dt><dd><a href="https://zsubmachine-studios.itch.io/" target="_blank" rel="noopener">https://zsubmachine-studios.itch.io</a></dd>
@@ -603,14 +607,249 @@
     <a href="mailto:zsubmachinestudios@gmail.com">Email</a>
     <a href="#games">Games</a>
     <a href="#softwares">Softwares</a>
+    <a href="https://github.com/zsubmachinestudios" target="_blank" rel="noopener">GitHub</a>
   </div>
 </footer>
 
+<button class="totop" type="button" aria-label="Back to top">↑</button>
+<div class="toast" role="status" aria-live="polite"></div>
+
 <script>
-  document.getElementById('year').textContent = new Date().getFullYear();
-  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});
-  document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%4)*70+'ms';io.observe(el);});
-  document.querySelectorAll('.card').forEach(c=>c.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect();c.style.setProperty('--mx',(e.clientX-r.left)+'px');c.style.setProperty('--my',(e.clientY-r.top)+'px');}));
+/* =====================================================================
+   PRODUCT CATALOG  — this is your "def boxfun(...)" system.
+   ---------------------------------------------------------------------
+   TO ADD A NEW GAME / SOFTWARE: just copy one { ... } block below,
+   paste it into GAMES or SOFTWARES, change the values. That's it.
+   Counts, stats, search & filters update automatically.
+
+   Fields (only title + img + links are required):
+     title    : "Name"
+     desc     : "One/two line description"
+     img      : "cover image URL"
+     status   : "FREE" / "NEW" / "BETA"      (top-right pill)
+     badge    : "NEW"                          (glowing top-left pill, optional)
+     platform : "Windows" / "Android"          (bottom-left of cover, optional)
+     tags     : ["Tag1","Tag2"]
+     readout  : "APK · 100MB"                  (small text at bottom-left)
+     links    : [ {label:"TRY NOW", url:"https://...", primary:true, icon:"github"} , ... ]
+                 -> first link = whole-card click; 1 or many buttons allowed
+                 -> icon options: "github", "linkedin", "play", "arrow"
+   ===================================================================== */
+
+const GAMES = [
+  {
+    title:"ICE: Infinite Cyber Elimination",
+    desc:"TPS/FPS shooter in a cyber-themed arena — unlimited players, instant action, no bloat.",
+    img:"https://img.itch.zone/aW1nLzI3NDc2NzY3LnBuZw==/original/8hfjDY.png",
+    status:"FREE", platform:"Android",
+    tags:["FPS/TPS","Multiplayer","Sci-Fi","Open World"],
+    readout:"APK · 100MB",
+    links:[{label:"TRY NOW !", url:"https://zsubmachine-studios.itch.io/ice-infinite-cyber-elimination", icon:"play"}]
+  },
+  {
+    title:"ICE Forest",
+    desc:"FPS/TPS combat through dense forest terrain — unlimited players, zero waiting.",
+    img:"https://img.itch.zone/aW1nLzI3NTkxMjQ5LnBuZw==/315x250%23c/EZOklM.png",
+    status:"FREE", platform:"Android",
+    tags:["FPS/TPS","Forest","Multiplayer"],
+    readout:"APK · 103MB",
+    links:[{label:"TRY NOW !", url:"https://zsubmachine-studios.itch.io/ice-forest", icon:"play"}]
+  },
+  {
+    title:"ICE Snow",
+    desc:"The ICE skin reimagined in a frozen environment — same instant, deathmatch-ready action.",
+    img:"https://img.itch.zone/aW1nLzI3NjQ2NjQ0LnBuZw==/original/gqgNW8.png",
+    status:"FREE", platform:"Android",
+    tags:["Deathmatch","PvP","Casual"],
+    readout:"APK · 108MB",
+    links:[{label:"TRY NOW !", url:"https://zsubmachine-studios.itch.io/ice-snow", icon:"play"}]
+  },
+  {
+    title:"ICE City",
+    desc:"Tactical FPS/TPS deathmatch across a dense urban battleground.",
+    img:"https://img.itch.zone/aW1nLzI3NjkyMTQyLnBuZw==/original/KRDeQ7.png",
+    status:"FREE", platform:"Android",
+    tags:["Tactical","FPS/TPS","PvP"],
+    readout:"APK · 106MB",
+    links:[{label:"TRY NOW !", url:"https://zsubmachine-studios.itch.io/ice-city", icon:"play"}]
+  }
+];
+
+const SOFTWARES = [
+  {
+    title:"Colab CLI for Windows",
+    desc:"Run Google Colab straight from your Windows terminal — interactive REPL and full multi-line Python scripts on cloud runtimes, no browser tab needed.",
+    img:"https://github.com/zsubmachinestudios/colab-cli-windows/raw/main/assets/videoframe_11269.png",
+    status:"OPEN SOURCE", badge:"NEW", platform:"Windows",
+    tags:["CLI","Google Colab","Python","Open Source"],
+    readout:"TERMINAL · LIGHTWEIGHT",
+    links:[
+      {label:"Learn more", url:"https://lnkd.in/p/gr8fMyUd", icon:"linkedin"},
+      {label:"Try it out", url:"https://github.com/zsubmachinestudios/colab-cli-windows", icon:"github", primary:true}
+    ]
+  },
+  {
+    title:"Agent Lite",
+    desc:"A privacy-first, fully offline AI agent. Runs entirely on your machine — no cloud, no data leaks — and stays light enough for older hardware.",
+    img:"https://raw.githubusercontent.com/zsubmachinestudios/zsubmachinestudios.github.io/main/AgentLITE.png",
+    status:"OFFLINE AI",
+    tags:["AI Agent","Offline","Privacy-First","Lightweight"],
+    readout:"LOCAL · NO CLOUD",
+    links:[{label:"LEARN MORE", url:"https://lnkd.in/p/g3Y_xMty", icon:"linkedin"}]
+  },
+  {
+    title:"Music Generator v1.5",
+    desc:"Generates original relaxing music on demand. No GPU, no AI models — ultra-lightweight and built to run smoothly on older, low-powered CPUs.",
+    img:"https://raw.githubusercontent.com/zsubmachinestudios/zsubmachinestudios.github.io/main/music.jpg",
+    status:"NEW",
+    tags:["Music","No GPU","Original","CPU-Only"],
+    readout:"v1.5 · ULTRA-LIGHT",
+    links:[{label:"LEARN MORE", url:"https://lnkd.in/p/g2wufQ79", icon:"linkedin"}]
+  }
+];
+
+/* ---------------- the reusable box function ---------------- */
+const ICONS = {
+  github:'<svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38v-1.33c-2.23.48-2.7-1.07-2.7-1.07-.36-.92-.89-1.17-.89-1.17-.73-.5.06-.49.06-.49.8.06 1.23.83 1.23.83.72 1.22 1.88.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.65-.89-3.65-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.2c0 .21.15.46.55.38A8 8 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>',
+  linkedin:'<svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M0 1.15C0 .52.52 0 1.18 0h13.64C15.48 0 16 .52 16 1.15v13.7c0 .63-.52 1.15-1.18 1.15H1.18C.52 16 0 15.48 0 14.85V1.15zm4.94 12.24V6.17H2.54v7.22h2.4zM3.74 5.18c.84 0 1.36-.55 1.36-1.25-.02-.71-.52-1.25-1.34-1.25S2.4 3.22 2.4 3.93c0 .7.52 1.25 1.33 1.25h.01zm4.9 8.21V9.36c0-.22.02-.43.08-.59.17-.43.57-.88 1.24-.88.87 0 1.22.67 1.22 1.64v3.86h2.4V9.25c0-2.22-1.18-3.25-2.77-3.25-1.28 0-1.86.7-2.18 1.2V6.17h-2.4c.03.68 0 7.22 0 7.22h2.4z"/></svg>',
+  play:'<svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 2.5v11l9-5.5z"/></svg>',
+  arrow:'<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>'
+};
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+function boxfun(p, kind){            // kind = "game" | "software"
+  const el = document.createElement('article');
+  el.className = 'card reveal' + (kind === 'software' ? ' sw' : '');
+  el.dataset.kind = kind;
+  el.dataset.search = [p.title, p.desc, ...(p.tags||[]), p.platform, p.status].join(' ').toLowerCase();
+  const initials = p.title.split(/\s+/).map(w => w[0]).join('').slice(0,3).toUpperCase();
+  const links = p.links || [];
+  el.innerHTML = `
+    <div class="cover">
+      <img src="${esc(p.img)}" alt="${esc(p.title)} cover" loading="lazy">
+      <div class="fallback">${esc(initials)}</div>
+      ${p.badge ? `<div class="badge">${esc(p.badge)}</div>` : ''}
+      ${p.status ? `<div class="status">${esc(p.status)}</div>` : ''}
+      ${p.platform ? `<div class="platform">▸ ${esc(p.platform)}</div>` : ''}
+    </div>
+    <div class="body">
+      <h3>${esc(p.title)}</h3>
+      <p class="desc">${esc(p.desc)}</p>
+      <div class="tags">${(p.tags||[]).map(t => `<span class="tag">${esc(t)}</span>`).join('')}</div>
+      <div class="foot">
+        <span class="readout">${esc(p.readout)}</span>
+        <div class="actions">
+          ${links.map(l => `<a class="deploy${l.primary ? ' primary' : ''}" href="${esc(l.url)}" target="_blank" rel="noopener">${l.icon && ICONS[l.icon] ? ICONS[l.icon] : ''}${esc(l.label)}</a>`).join('')}
+        </div>
+      </div>
+    </div>
+    ${links[0] ? `<a class="hit" href="${esc(links[0].url)}" target="_blank" rel="noopener" aria-label="Open ${esc(p.title)}" tabindex="-1"></a>` : ''}`;
+  const cover = el.querySelector('.cover'), img = cover.querySelector('img');
+  img.addEventListener('load', () => cover.classList.add('loaded'));
+  img.addEventListener('error', () => { cover.classList.add('loaded','failed'); img.remove(); });
+  return el;
+}
+
+function renderGrid(gridId, list, kind){
+  const grid = document.getElementById(gridId);
+  list.forEach(p => grid.appendChild(boxfun(p, kind)));
+  const empty = document.createElement('div');
+  empty.className = 'empty'; empty.hidden = true; empty.textContent = '// no matches — try another keyword';
+  grid.appendChild(empty);
+}
+const pad = n => String(n).padStart(2,'0');
+renderGrid('games-grid', GAMES, 'game');
+renderGrid('sw-grid', SOFTWARES, 'software');
+document.getElementById('games-count').textContent = pad(GAMES.length) + ' GAMES';
+document.getElementById('sw-count').textContent = pad(SOFTWARES.length) + ' SOFTWARES';
+document.getElementById('stat-products').dataset.to = GAMES.length + SOFTWARES.length;
+
+/* ---------------- effects ---------------- */
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+document.getElementById('year').textContent = new Date().getFullYear();
+
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }), {threshold:.12});
+document.querySelectorAll('.reveal').forEach((el,i) => { el.style.transitionDelay = (i%4)*70 + 'ms'; io.observe(el); });
+
+// card spotlight + 3D tilt
+document.querySelectorAll('.card').forEach(c => {
+  c.addEventListener('pointermove', e => {
+    const r = c.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
+    c.style.setProperty('--mx', x + 'px'); c.style.setProperty('--my', y + 'px');
+    if (!reduce){ c.style.setProperty('--ry', ((x / r.width) - .5) * 8 + 'deg'); c.style.setProperty('--rx', (.5 - (y / r.height)) * 8 + 'deg'); }
+  });
+  c.addEventListener('pointerleave', () => { c.style.setProperty('--rx','0deg'); c.style.setProperty('--ry','0deg'); });
+});
+
+// page spotlight, scroll progress, back-to-top, active nav
+const bar = document.querySelector('.progress'), totop = document.querySelector('.totop');
+addEventListener('pointermove', e => { document.documentElement.style.setProperty('--sx', e.clientX + 'px'); document.documentElement.style.setProperty('--sy', e.clientY + 'px'); }, {passive:true});
+const onScroll = () => {
+  const h = document.documentElement, max = h.scrollHeight - h.clientHeight;
+  bar.style.transform = `scaleX(${max > 0 ? h.scrollTop / max : 0})`;
+  totop.classList.toggle('show', h.scrollTop > 600);
+};
+addEventListener('scroll', onScroll, {passive:true}); onScroll();
+totop.addEventListener('click', () => scrollTo({top:0, behavior: reduce ? 'auto' : 'smooth'}));
+const navLinks = [...document.querySelectorAll('nav .links a[href^="#"]')];
+const secIO = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id));
+}), {rootMargin:'-45% 0px -50% 0px'});
+document.querySelectorAll('section[id]').forEach(s => secIO.observe(s));
+
+// mobile menu
+const nav = document.querySelector('nav'), menuBtn = document.querySelector('.menu-btn');
+menuBtn.addEventListener('click', () => { const o = nav.classList.toggle('open'); menuBtn.setAttribute('aria-expanded', o); });
+nav.querySelectorAll('.links a').forEach(a => a.addEventListener('click', () => { nav.classList.remove('open'); menuBtn.setAttribute('aria-expanded', false); }));
+
+// stats count-up
+document.querySelectorAll('[data-to]').forEach(el => {
+  const to = +el.dataset.to, pre = el.dataset.pre || '', suf = el.dataset.suf || '';
+  if (reduce){ el.textContent = pre + pad(to) + suf; return; }
+  const run = () => { const t0 = performance.now(); const step = t => { const k = Math.min(1,(t - t0)/1200), v = Math.round(to * (1 - Math.pow(1 - k, 3))); el.textContent = pre + pad(v) + suf; if (k < 1) requestAnimationFrame(step); }; requestAnimationFrame(step); };
+  new IntersectionObserver((es,o) => { if (es[0].isIntersecting){ run(); o.disconnect(); } }).observe(el);
+});
+
+// typing rotator
+(() => {
+  const el = document.getElementById('typed'), words = ['old laptops.','low-end phones.','offline use.','zero GPUs.','instant action.'];
+  if (reduce){ el.textContent = words[0]; return; }
+  let w = 0, i = 0, del = false;
+  (function tick(){
+    const word = words[w]; el.textContent = word.slice(0, i);
+    if (!del && i === word.length){ del = true; return setTimeout(tick, 1600); }
+    if (del && i === 0){ del = false; w = (w + 1) % words.length; }
+    i += del ? -1 : 1; setTimeout(tick, del ? 40 : 85);
+  })();
+})();
+
+// filter chips + search
+const chips = [...document.querySelectorAll('.chip')], q = document.getElementById('q');
+let mode = 'all';
+function applyFilter(){
+  const term = q.value.trim().toLowerCase();
+  [['games','game'],['softwares','software']].forEach(([id,kind]) => {
+    const sec = document.getElementById(id);
+    sec.classList.toggle('hidden', mode !== 'all' && mode !== kind);
+    let shown = 0;
+    sec.querySelectorAll('.card').forEach(c => { const ok = !term || c.dataset.search.includes(term); c.hidden = !ok; if (ok){ shown++; c.classList.add('in'); } });
+    sec.querySelector('.empty').hidden = shown > 0;
+  });
+}
+chips.forEach(ch => ch.addEventListener('click', () => { chips.forEach(c => { c.classList.toggle('on', c === ch); c.setAttribute('aria-pressed', c === ch); }); mode = ch.dataset.f; applyFilter(); }));
+q.addEventListener('input', applyFilter);
+addEventListener('keydown', e => {
+  if (e.key === '/' && document.activeElement !== q){ e.preventDefault(); q.focus(); }
+  if (e.key === 'Escape' && document.activeElement === q){ q.value = ''; applyFilter(); q.blur(); }
+});
+
+// copy email + toast
+const toast = document.querySelector('.toast');
+document.querySelectorAll('[data-copy]').forEach(b => b.addEventListener('click', async () => {
+  try { await navigator.clipboard.writeText(b.dataset.copy); toast.textContent = '✓ Email copied'; }
+  catch { toast.textContent = b.dataset.copy; }
+  toast.classList.add('show'); clearTimeout(toast._t); toast._t = setTimeout(() => toast.classList.remove('show'), 1800);
+}));
 </script>
 </body>
 </html>
